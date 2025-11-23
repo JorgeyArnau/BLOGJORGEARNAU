@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Jorge & Arnau · Laboratorio de Webs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Tipografías (distintas a la plantilla original) -->
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-main: #f7f7f7;
+      --bg-card: #ffffff;
+      --bg-footer: #000000;
+      --text-main: #111111;
+      --text-soft: #777777;
+      --accent: #3153ff;
+      --border-soft: #e3e3e3;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg-main);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* ========= HEADER + NAV ========= */
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(247, 247, 247, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border-soft);
+    }
+
+    .topbar {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 14px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .search-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      border: 1px solid var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 26px;
+      font-size: 13px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-family: "Outfit", sans-serif;
+    }
+
+    nav a {
+      position: relative;
+      padding-bottom: 4px;
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 1px;
+      background: var(--text-main);
+      transition: width 0.25s ease;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    /* ========= HERO (imagen grande con título) ========= */
+
+    .hero {
+      max-width: 1200px;
+      margin: 0 auto 40px;
+      padding: 0 28px;
+    }
+
+    .hero-inner {
+      position: relative;
+      overflow: hidden;
+      min-height: 320px;
+      border-radius: 4px;
+      background: #eee url("https://images.pexels.com/photos/37347/office-freelancer-computer-business-37347.jpeg?auto=compress&cs=tinysrgb&w=1600") center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: heroFade 0.9s ease-out;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.1), rgba(0,0,0,0.35));
+    }
+
+    .hero-title-wrap {
+      position: relative;
+      text-align: center;
+      color: #ffffff;
+    }
+
+    .hero-kicker {
+      font-family: "Outfit", sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .hero-title {
+      font-family: "Outfit", sans-serif;
+      font-weight: 400;
+      font-size: 32px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .hero-subtitle {
+      font-size: 14px;
+      max-width: 520px;
+      margin: 0 auto;
+      color: #eaeaea;
+    }
+
+    @keyframes heroFade {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ========= CONTENIDO PRINCIPAL ========= */
+
+    main {
+      max-width: 1200px;
+      margin: 0 auto 60px;
+      padding: 0 28px;
+    }
+
+    .section-title {
+      font-family: "Outfit", sans-serif;
+      font-size: 15px;
+      letter-spacing: 0.30em;
+      text-transform: uppercase;
+      margin: 40px 0 24px;
+    }
+
+    /* ---------- Tarjetas grandes (webs principales) ---------- */
+
+    .projects-main {
+      display: flex;
+      flex-direction: column;
+      gap: 26px;
+    }
+
+    .project-card {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(0, 1.5fr);
+      background: var(--bg-card);
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.04);
+      border: 1px solid #efefef;
+      transform: translateY(0);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 30px rgba(0,0,0,0.08);
+    }
+
+    .project-card img {
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .project-content {
+      padding: 26px 28px 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: #fcfcfc;
+    }
+
+    .project-meta {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--text-soft);
+      margin-bottom: 8px;
+    }
+
+    .project-title {
+      font-family: "Outfit", sans-serif;
+      font-weight: 400;
+      font-size: 22px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .project-desc {
+      font-size: 14px;
+      color: #444444;
+      margin-bottom: 18px;
+    }
+
+    .project-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--text-soft);
+      border-top: 1px solid var(--border-soft);
+      padding-top: 10px;
+      margin-top: 10px;
+    }
+
+    .project-link {
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: "Outfit", sans-serif;
+    }
+
+    .project-link span {
+      font-size: 16px;
+      transform: translateY(1px);
+    }
+
+    .project-link:hover {
+      color: var(--accent);
+    }
+
+    /* Línea fina tipo Wix entre meta y contador */
+
+    .divider-line {
+      height: 1px;
+      background: var(--border-soft);
+      margin: 16px 0 10px;
+      width: 100%;
+    }
+
+    /* ---------- Galería inferior (resto de webs) ---------- */
+
+    .gallery-wrapper {
+      margin-top: 46px;
+      margin-bottom: 10px;
+    }
+
+    .gallery-title {
+      font-family: "Outfit", sans-serif;
+      font-size: 15px;
+      letter-spacing: 0.30em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .gallery-row {
+      display: flex;
+      gap: 18px;
+      overflow-x: auto;
+      padding: 4px 2px 10px;
+      scrollbar-width: thin;
+      scrollbar-color: #c9c9c9 transparent;
+    }
+
+    .gallery-row::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    .gallery-row::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .gallery-row::-webkit-scrollbar-thumb {
+      background: #c9c9c9;
+      border-radius: 999px;
+    }
+
+    .gallery-card {
+      min-width: 230px;
+      max-width: 240px;
+      background: var(--bg-card);
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid #ececec;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .gallery-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 22px rgba(0,0,0,0.08);
+    }
+
+    .gallery-card img {
+      height: 130px;
+      object-fit: cover;
+    }
+
+    .gallery-body {
+      padding: 10px 12px 12px;
+    }
+
+    .gallery-title-small {
+      font-family: "Outfit", sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.20em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .gallery-desc {
+      font-size: 12px;
+      color: #555555;
+    }
+
+    /* ========= FOOTER NEGRO ========= */
+
+    footer {
+      background: var(--bg-footer);
+      color: #ffffff;
+      padding: 46px 28px 30px;
+      margin-top: 40px;
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.1fr 1.3fr 1.1fr;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 16px;
+      font-size: 18px;
+    }
+
+    .footer-social a {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      border: 1px solid #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+    }
+
+    .footer-center {
+      text-align: center;
+    }
+
+    .footer-title {
+      font-family: "Outfit", sans-serif;
+      font-weight: 400;
+      font-size: 18px;
+      letter-spacing: 0.30em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .footer-form {
+      margin-top: 10px;
+    }
+
+    .footer-form input[type="email"] {
+      width: 100%;
+      background: transparent;
+      border: 1px solid #ffffff;
+      padding: 10px 12px;
+      color: #ffffff;
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+
+    .footer-form input::placeholder {
+      color: #cfcfcf;
+      font-size: 12px;
+    }
+
+    .footer-form button {
+      width: 100%;
+      background: transparent;
+      border: 1px solid #ffffff;
+      color: #ffffff;
+      padding: 10px 12px;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      cursor: pointer;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .footer-form button:hover {
+      background: #ffffff;
+      color: #000000;
+    }
+
+    .footer-right {
+      font-size: 12px;
+      text-align: right;
+      color: #c1c1c1;
+      line-height: 1.5;
+    }
+
+    .footer-right a {
+      text-decoration: underline;
+    }
+
+    /* ========= RESPONSIVE ========= */
+
+    @media (max-width: 900px) {
+      .project-card {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-inner {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .footer-social {
+        justify-content: center;
+      }
+
+      .footer-right {
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .hero-inner {
+        min-height: 260px;
+      }
+
+      .hero-title {
+        font-size: 24px;
+        letter-spacing: 0.20em;
+      }
+
+      nav ul {
+        gap: 16px;
+        font-size: 11px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <header>
+    <div class="topbar">
+      <div class="search-icon">🔍</div>
+      <nav>
+        <ul>
+          <li><a href="#inicio">INICIO</a></li>
+          <li><a href="#proyectos">PROYECTOS</a></li>
+          <li><a href="#galeria">GALERÍA</a></li>
+          <li><a href="#sobre">SOBRE NOSOTROS</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="inicio">
+    <div class="hero-inner">
+      <div class="hero-overlay"></div>
+      <div class="hero-title-wrap">
+        <div class="hero-kicker">JORGE & ARNAU · CAFyD</div>
+        <h1 class="hero-title">DISEÑO PARA CREAR</h1>
+        <p class="hero-subtitle">
+          Laboratorio de webs centradas en deporte, salud y movimiento. Aquí
+          recopilamos las páginas que vamos desarrollando y probando para
+          monetizar con Google&nbsp;AdSense.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main>
+    <h2 class="section-title" id="proyectos">ÚLTIMAS WEBS PUBLICADAS</h2>
+
+   <section class="projects-main">
+  <!-- CARD 1 -->
+  <article class="project-card">
+    <img src="https://images.pexels.com/photos/1552249/pexels-photo-1552249.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Mockup web de running" />
+    <div class="project-content">
+      <div>
+        <div class="project-meta">Admin · 23 nov 2025 · 2 min de lectura</div>
+
+        <!-- TÍTULO CON LINK -->
+        <h3 class="project-title">
+          <a href="">RUNNERS EN TU CIUDAD</a>
+        </h3>
+
+        <p class="project-desc">
+          Directorio de quedadas y grupos para salir a correr por barrios. La idea:
+          que cualquier persona pueda encontrar ritmo, nivel y zona sin perder tiempo
+          en redes sociales.
+        </p>
+      </div>
+
+      <div>
+        <div class="divider-line"></div>
+        <div class="project-footer">
+          <div>0 visualizaciones · 0 comentarios</div>
+
+          <!-- LINK DEL BOTÓN INFERIOR (OPCIONALMENTE TAMBIÉN CLICABLE) -->
+          <a class="project-link" href="">
+            Ver la web <span>➜</span>
+          </a>
+
+        </div>
+      </div>
+    </div>
+  </article>
+
+
+
+      <!-- CARD 2 -->
+      <article class="project-card">
+        <img src="https://images.pexels.com/photos/414029/pexels-photo-414029.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Mockup web de gimnasio" />
+        <div class="project-content">
+          <div>
+            <div class="project-meta">Admin · 18 nov 2025 · 3 min de lectura</div>
+            <h3 class="project-title">MAPA DE GIMNASIOS LOW&nbsp;COST</h3>
+            <p class="project-desc">
+              Comparador sencillo de cuotas, horarios y servicios de gimnasios low cost
+              en distintas ciudades. Pensado para estudiantes y gente que cambia de ciudad
+              con frecuencia.
+            </p>
+          </div>
+          <div>
+            <div class="divider-line"></div>
+            <div class="project-footer">
+              <div>0 visualizaciones · 0 comentarios</div>
+              <a class="project-link" href="#"
+                >Ver la web <span>➜</span></a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- CARD 3 -->
+      <article class="project-card">
+        <img src="https://images.pexels.com/photos/6456229/pexels-photo-6456229.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Mockup web de pádel" />
+        <div class="project-content">
+          <div>
+            <div class="project-meta">Admin · 10 nov 2025 · 1 min de lectura</div>
+            <h3 class="project-title">PÁDEL EN HORAS VALLE</h3>
+            <p class="project-desc">
+              Landing enfocada a reservar pistas en las horas menos demandadas con precios
+              dinámicos. Ideal para monetizar con contenido de club, material y afiliados.
+            </p>
+          </div>
+          <div>
+            <div class="divider-line"></div>
+            <div class="project-footer">
+              <div>0 visualizaciones · 0 comentarios</div>
+              <a class="project-link" href="#"
+                >Ver la web <span>➜</span></a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Añade más tarjetas copiando el bloque .project-card -->
+    </section>
+
+    <!-- GALERÍA INFERIOR -->
+    <section class="gallery-wrapper" id="galeria">
+      <h2 class="gallery-title">MÁS PROYECTOS</h2>
+      <div class="gallery-row">
+        <a href="#" class="gallery-card">
+          <img src="https://images.pexels.com/photos/1552104/pexels-photo-1552104.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Proyecto 1" />
+          <div class="gallery-body">
+            <div class="gallery-title-small">CALISTENIA EN PARQUES</div>
+            <p class="gallery-desc">Mapa interactivo de barras y zonas de entrenamiento al aire libre.</p>
+          </div>
+        </a>
+
+        <a href="#" class="gallery-card">
+          <img src="https://images.pexels.com/photos/1552242/pexels-photo-1552242.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Proyecto 2" />
+          <div class="gallery-body">
+            <div class="gallery-title-small">LIGAS UNIVERSITARIAS</div>
+            <p class="gallery-desc">Resultados, rankings y crónicas de ligas entre facultades.</p>
+          </div>
+        </a>
+
+        <a href="#" class="gallery-card">
+          <img src="https://images.pexels.com/photos/1552240/pexels-photo-1552240.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Proyecto 3" />
+          <div class="gallery-body">
+            <div class="gallery-title-small">RETOS DE PASOS</div>
+            <p class="gallery-desc">Web simple para organizar retos de pasos con rankings semanales.</p>
+          </div>
+        </a>
+
+        <a href="#" class="gallery-card">
+          <img src="https://images.pexels.com/photos/4761663/pexels-photo-4761663.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Proyecto 4" />
+          <div class="gallery-body">
+            <div class="gallery-title-small">GUÍA DE MATERIAL</div>
+            <p class="gallery-desc">Reseñas básicas de material deportivo para principiantes.</p>
+          </div>
+        </a>
+
+        <!-- Puedes seguir añadiendo gallery-card para el resto de webs -->
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER NEGRO -->
+  <footer id="sobre">
+    <div class="footer-inner">
+      <div class="footer-social">
+        <a href="#" aria-label="Facebook">f</a>
+        <a href="#" aria-label="X">x</a>
+        <a href="#" aria-label="Pinterest">P</a>
+        <a href="#" aria-label="Instagram">◎</a>
+      </div>
+
+      <div class="footer-center">
+        <div class="footer-title">JORGE &amp; ARNAU</div>
+        <div>Laboratorio de webs sobre deporte y movimiento.</div>
+        <form class="footer-form" onsubmit="return false;">
+          <input type="email" placeholder="Ingresa tu email aquí *" />
+          <button type="submit">Enviar</button>
+        </form>
+      </div>
+
+      <div class="footer-right">
+        © 2025 Creado por Jorge &amp; Arnau.<br />
+        Todas las webs se desarrollan como prototipos para probar modelos con
+        Google&nbsp;AdSense.
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
